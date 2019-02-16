@@ -1,0 +1,21 @@
+# Add any directories, files, or patterns you don't want to be tracked by version control
+
+# NetBeans specific #
+**/nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml
+
+# Class Files #
+*.class
+
+# Form Files # 
+
+# Package Files #
+*.jar
+*.war
+*.ear
+*.csv
