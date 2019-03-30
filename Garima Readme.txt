@@ -7,7 +7,7 @@ You can reference the .gitignore template: Node.gitignore
 
 About how to remove node_modules
 git rm -r --cached node_modules
-git commit -m 'Remove the now ignored directory node_modules'
+git commit -m 'Removed the now ignored directory node_modules'
 git push origin master
 Then check your repository.
 
