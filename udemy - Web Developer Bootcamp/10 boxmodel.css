@@ -1,0 +1,22 @@
+p {
+
+    /* Content - Width and Height */
+    /* width: 200px; */
+    width: 50%; /* 50% of parent width */
+    height: 50px;
+
+    /* Border */
+    border: 2px solid blue;
+
+    /* Padding */
+    /* padding: 10px; This sets 10px padding on all 4 sides of text. */
+    padding-left: 20px;
+
+    /* Margin */
+    /* margin: 200px; This sets 200px margin on all sides of the content */
+    /* margin-top: 40px; This only sets margin on top */
+    /* margin: 20px 40px 50px 100px; top right bottom left */
+    /* margin: 0 auto 0 auto; auto refers to width of 50% defined earlier for p */
+    /* margin: 0 auto; Works same as 0 auto 0 auto */
+    margin: 50px 20px; /* top and bottom: 50px, left and right: 20px */
+}

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>JavaScript Object Practice</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+        // This shouls ideally go in a separate .js file but then this .html file will be blank.
+        // So putting all .js code here only so I don't have two files unnecessarily.
+        var moviesArr = [
+            {
+                title: "Gully Boy",
+                rating: 5.0,
+                hasWatched: true
+            },
+            {
+                title: "You've got Mail",
+                rating: 4.5,
+                hasWatched: true
+            },
+            {
+                title: "Dhamaal",
+                rating: 4.0,
+                hasWatched: false
+            },
+            {
+                title: "Padmavat",
+                rating: 3.5,
+                hasWatched: true
+            }
+        ];
+
+    console.log("Iterating through the array");
+    moviesArr.forEach(function(movie){
+        console.log(buildString(movie));
+    });
+
+    function buildString(movie){
+                /*
+        if (movie.hasWatched){
+            console.log("You have watched \""+movie.title+"\" - "+movie.rating+" stars");
+        } else {
+            console.log("You have not seen \"" + movie.title + "\" - " + movie.rating + " stars");
+        }
+        OR     */
+        var result = "You have ";
+        if (movie.hasWatched) {
+            result += "watched ";
+        } else {
+            result += "not seen ";
+        }
+        result = result + "\"" + movie.title + "\" - " + movie.rating + " stars";
+        return result;
+    }
+    // ----------------------------------------------------------------------------------------
+    console.log("~~~~~~~~~~~~~~~~~~~ Object methods ~~~~~~~~~~~~~~~~~~~");
+    var obj = {
+        name: "Garima",
+        age: 27,
+        isCool: true,
+        friends: ["ayush","somya","ritu"],
+        add: function (x,y){
+            return x + y;
+        }
+    }
+    console.log(obj);
+    function speak(){
+        return "WOOF!";
+    }
+
+    function speak(){ 
+        return "MEOW !";
+    }
+
+    // the WOOF speak() is gone forever!
+    // Thats because they exist in the global namespace and redefining another function with 
+    // the same name makes us lose the previous one.
+    // To overcome this, use separate namespaces using objects. See below:
+
+    var dogSpace = {};
+    dogSpace.speak = function(){
+        return "WOOF!";
+    }
+
+    var catSpace = {};
+    catSpace.speak = function(){
+        return "MEOW !";
+    }
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

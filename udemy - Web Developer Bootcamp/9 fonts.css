@@ -1,0 +1,50 @@
+/* font-family */
+p {
+    /* font-family: Arial; */
+    font-family: 'Srisakdi', cursive; /* include here as well as in <head> of html*/
+}
+
+h1 {
+    font-family: Georgia;
+}
+
+/* font-size */
+body {
+    font-size: 10px;
+}
+h1 {
+    /* 5 times the body font as 5 em and default is 10px as inherited from body */
+    font-size: 5em;
+}
+p {
+    /* /* 2 times the body font as 2 em and default is 10px as inherited from body */ 
+    font-size: 2em;
+}
+span {
+    /* 2 times the paragraph font as 2 em and default is inherited from paragraph */
+    font-size: 2em;
+}
+
+/* font-weight */
+span {
+    font-weight: bold;
+}
+
+/* line-height */
+p {
+    line-height: 1.5;
+}
+
+/* text-align */
+body {
+    text-align: center;
+}
+
+/* text-decoration */
+p {
+    text-decoration: underline;
+}
+
+h1 {
+    text-decoration: line-through;
+}
