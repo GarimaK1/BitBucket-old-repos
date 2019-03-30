@@ -1,0 +1,15 @@
+{
+  "name": "mongodb_mongoose_first_attempt",
+  "version": "1.0.0",
+  "description": "first attempt at implementing mongoDB CRUD operations and using mongoose",
+  "main": "1 mongoose getting started.js",
+  "dependencies": {
+    "mongoose": "^5.4.19"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

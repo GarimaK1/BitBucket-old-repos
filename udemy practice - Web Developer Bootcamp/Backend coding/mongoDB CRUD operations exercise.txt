@@ -1,0 +1,116 @@
+C:\Users\garim>mongo
+MongoDB shell version v4.0.6
+connecting to: mongodb://127.0.0.1:27017/?gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("3d0bd30d-60e0-4aff-b2d4-bc0c0873f116") }
+MongoDB server version: 4.0.6
+Server has startup warnings:
+2019-03-13T23:59:45.878-0400 I CONTROL  [initandlisten]
+2019-03-13T23:59:45.878-0400 I CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.
+2019-03-13T23:59:45.878-0400 I CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
+2019-03-13T23:59:45.878-0400 I CONTROL  [initandlisten]
+---
+Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+
+The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+and anyone you share the URL with. MongoDB may use this information to make product
+improvements and to suggest MongoDB products and deployment options to you.
+
+To enable free monitoring, run the following command: db.enableFreeMonitoring()
+To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+---
+
+> show dbs
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+> use assign7
+switched to db assign7
+> show collections
+> db.dogs.insert({name: "Rusty", breed: "Mutt"})
+WriteResult({ "nInserted" : 1 })
+> show collections
+dogs
+> show dbs
+admin    0.000GB
+assign7  0.000GB
+config   0.000GB
+local    0.000GB
+> db.dogs.find()
+{ "_id" : ObjectId("5c89d646d20fcee04a75c293"), "name" : "Rusty", "breed" : "Mutt" }
+> db.dogs.insert({name: "Lucy", breed: "Mutt"})
+WriteResult({ "nInserted" : 1 })
+> db.dogs.find()
+{ "_id" : ObjectId("5c89d646d20fcee04a75c293"), "name" : "Rusty", "breed" : "Mutt" }
+{ "_id" : ObjectId("5c89d687d20fcee04a75c294"), "name" : "Lucy", "breed" : "Mutt" }
+> db.dogs.find({name: "Rusty"})
+{ "_id" : ObjectId("5c89d646d20fcee04a75c293"), "name" : "Rusty", "breed" : "Mutt" }
+> db.dogs.find({breed: "Mutt"})
+{ "_id" : ObjectId("5c89d646d20fcee04a75c293"), "name" : "Rusty", "breed" : "Mutt" }
+{ "_id" : ObjectId("5c89d687d20fcee04a75c294"), "name" : "Lucy", "breed" : "Mutt" }
+> db.dogs.insert({name: "Lulu", breed: "Poodle"})
+WriteResult({ "nInserted" : 1 })
+> db.dogs.insert({name: "Queen", breed: "Labrador"})
+WriteResult({ "nInserted" : 1 })
+> db.dogs.find()
+{ "_id" : ObjectId("5c89d646d20fcee04a75c293"), "name" : "Rusty", "breed" : "Mutt" }
+{ "_id" : ObjectId("5c89d687d20fcee04a75c294"), "name" : "Lucy", "breed" : "Mutt" }
+{ "_id" : ObjectId("5c89d6c7d20fcee04a75c295"), "name" : "Lulu", "breed" : "Poodle" }
+{ "_id" : ObjectId("5c89d6e1d20fcee04a75c296"), "name" : "Queen", "breed" : "Labrador" }
+> db.dogs.find({name: "Rusty"})
+{ "_id" : ObjectId("5c89a52da1c84dc2fae69f6c"), "name" : "Rusty", "breed" : "Mutt" }
+> db.dogs.find({breed: "Mutt"})
+{ "_id" : ObjectId("5c89a52da1c84dc2fae69f6c"), "name" : "Rusty", "breed" : "Mutt" }
+{ "_id" : ObjectId("5c89a5b7a1c84dc2fae69f6e"), "name" : "Queen", "breed" : "Mutt" }
+=========================================================================================================
+deleted the previous "dogs" collection and created a new one.
+=========================================================================================================
+db.dogs.find()
+{ "_id" : ObjectId("5c89a52da1c84dc2fae69f6c"), "name" : "Rusty", "breed" : "Mutt" }
+{ "_id" : ObjectId("5c89a573a1c84dc2fae69f6d"), "name" : "Lucy", "breed" : "Labrador" }
+{ "_id" : ObjectId("5c89a5b7a1c84dc2fae69f6e"), "name" : "Queen", "breed" : "Mutt" }
+{ "_id" : ObjectId("5c89a5d5a1c84dc2fae69f6f"), "name" : "Lulu", "breed" : "Labradoodle" }
+> db.dogs.update({name: "Lulu"},{breed: "Labradoodle"})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.dogs.find()
+{ "_id" : ObjectId("5c89a52da1c84dc2fae69f6c"), "name" : "Rusty", "breed" : "Mutt" }
+{ "_id" : ObjectId("5c89a573a1c84dc2fae69f6d"), "name" : "Lucy", "breed" : "Labrador" }
+{ "_id" : ObjectId("5c89a5b7a1c84dc2fae69f6e"), "name" : "Queen", "breed" : "Mutt" }
+{ "_id" : ObjectId("5c89a5d5a1c84dc2fae69f6f"), "breed" : "Labradoodle" }
+> db.dogs.update({name: "Rusty"}, {$set: {name: "Rustyy", isCute: true}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.dogs.find()
+{ "_id" : ObjectId("5c89a52da1c84dc2fae69f6c"), "name" : "Rustyy", "breed" : "Mutt", "isCute" : true }
+{ "_id" : ObjectId("5c89a573a1c84dc2fae69f6d"), "name" : "Lucy", "breed" : "Labrador" }
+{ "_id" : ObjectId("5c89a5b7a1c84dc2fae69f6e"), "name" : "Queen", "breed" : "Mutt" }
+{ "_id" : ObjectId("5c89a5d5a1c84dc2fae69f6f"), "breed" : "Labradoodle" }
+> db.dogs.remove({breed: "Labradoodle"})
+WriteResult({ "nRemoved" : 1 })
+> db.dogs.find()
+{ "_id" : ObjectId("5c89a52da1c84dc2fae69f6c"), "name" : "Rustyy", "breed" : "Mutt", "isCute" : true }
+{ "_id" : ObjectId("5c89a573a1c84dc2fae69f6d"), "name" : "Lucy", "breed" : "Labrador" }
+{ "_id" : ObjectId("5c89a5b7a1c84dc2fae69f6e"), "name" : "Queen", "breed" : "Mutt" }
+> show collections
+dogs
+> db.dogs.drop() 
+true
+> show collections
+> show dbs
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

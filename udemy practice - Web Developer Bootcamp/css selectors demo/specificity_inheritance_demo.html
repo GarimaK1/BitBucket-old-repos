@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Specificity + Inheritance Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="main.js"></script>
+    <style>
+        ul{
+            color: blue;
+        } 
+        p{
+            color: rgb(20, 160, 20);
+            font-weight: bold;
+        }
+        body{
+            color: red;
+        }
+        li{
+            color: orange;
+        }
+        .highlight{
+            color: yellow;
+        }
+        #special{
+            color: pink;
+        }
+        #red {
+            color: red;
+        }
+        .blue {
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <h1>Specificity + Inheritance Demo</h1>
+
+    <p>Hello!!!</p>
+
+    <ul>
+        <li id="special" class="highlight">one</li>
+        <li>two</li>
+        <li class="highlight">three</li>
+        <li>four</li>
+        <li>five</li>
+    </ul>
+
+    <div id="red" class="blue">
+        This is a &lt;div&gt;. What is the text color (id="red" or class="blue?") applied to text color.
+        Even though ".blue" rule is applied after the "#red" rule. 
+        <br>
+        Ans: Red because id selector has more specificity.
+    </div>
+    
+</body>
+</html>

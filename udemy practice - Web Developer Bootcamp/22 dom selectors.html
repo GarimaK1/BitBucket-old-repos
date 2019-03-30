@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>DOM Selectors</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <h1>Hello</h1>
+
+    <h1>Goodbye</h1>
+
+    <ul>
+        <li id="highlight">Item 1</li>
+        <li class="bolded">Item 2</li>
+        <li class="bolded">Item 3</li>
+    </ul>
+    <script>
+        console.log("~~~~~~~~~~~~~~~~ Using querySelector() ~~~~~~~~~~~~~~~~");
+        var tag = document.querySelector("h1");
+        console.log(tag);
+        tag = document.querySelector("#highlight");
+        console.log(tag);
+
+        console.log("~~~~~~~~~~~~~~~~ Using querySelectorAll() ~~~~~~~~~~~~~~~~");
+        var tags = document.querySelectorAll("h1");
+        console.log(tags);
+        console.log(tags[0]);
+
+        console.log("~~~~~~~~~~~~~~~~ Using getElementById() ~~~~~~~~~~~~~~~~");
+        tag = document.getElementById("highlight");
+        console.log(tag);
+
+        console.log("~~~~~~~~~~~~~~~~ Using getElementsByClassName() ~~~~~~~~~~~~~~~~");
+        tags = document.getElementsByClassName("bolded");
+        console.log(tags); //HTMLCollection
+
+        console.log("~~~~~~~~~~~~~~~~ Using getElementsByTagName() ~~~~~~~~~~~~~~~~");
+        tags = document.getElementsByTagName("li");
+        console.log(tags);
+        console.dir(tags);
+        console.dir(tags[0]);
+
+        console.log("~~~~~~~~~~~~~~~~ Using getElementsByTagName() for title ~~~~~~~~~~~~~~~~");
+        tags = document.getElementsByTagName("title");
+        console.log(tags);
+        console.log(tags[0]);
+    </script>
+</body>
+</html>

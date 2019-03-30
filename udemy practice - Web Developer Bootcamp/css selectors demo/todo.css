@@ -1,0 +1,12 @@
+li {
+    border: 2px solid red;
+    list-style-position: outside;
+}
+
+#special{
+    background: yellow;
+}
+
+.completed{
+    text-decoration: line-through;
+}
