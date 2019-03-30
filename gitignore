@@ -20,5 +20,5 @@ nb-configuration.xml
 *.ear
 *.csv
 
-# Node Modules (dependencies) for NodeJS#
-**/node_modules/**
+# Node Modules (dependencies) for NodeJS #
+node_modules/
