@@ -1,0 +1,14 @@
+div {
+  display: flex;
+  flex-direction: column;
+}
+main {
+  flex: 1 0 auto;
+  margin: auto;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  width: 60%;
+}
+app-footer {
+  flex-shrink: 0;
+}

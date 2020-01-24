@@ -1,0 +1,17 @@
+mat-form-field {
+  width: 100%;
+}
+
+button {
+  width: 5rem;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  text-decoration: none;
+}
