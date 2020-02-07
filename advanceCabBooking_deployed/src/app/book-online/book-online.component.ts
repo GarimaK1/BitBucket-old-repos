@@ -4,67 +4,67 @@ import {
   ElementRef,
   NgZone,
   OnInit
-} from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import * as moment from 'moment';
-import { MapsAPILoader } from '@agm/core';
-import { ScheduleCabService } from '../scheduleCab.service';
-import { PaymentDialogComponent } from '../payment/payment.component';
-import { MatDialog } from '@angular/material/dialog';
-import { PaymentService } from '../payment.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { ErrorComponent } from '../error/error.component';
+} from "@angular/core";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import * as moment from "moment";
+import { MapsAPILoader } from "@agm/core";
+import { ScheduleCabService } from "../scheduleCab.service";
+import { PaymentDialogComponent } from "../payment/payment.component";
+import { MatDialog } from "@angular/material/dialog";
+import { PaymentService } from "../payment.service";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { ErrorComponent } from "../error/error.component";
 
 @Component({
-  selector: 'app-book-online',
-  templateUrl: './book-online.component.html',
-  styleUrls: ['./book-online.component.css']
+  selector: "app-book-online",
+  templateUrl: "./book-online.component.html",
+  styleUrls: ["./book-online.component.css"]
 })
 export class BookOnlineComponent implements OnInit {
-
   minDate = moment().format();
   maxDate = moment(this.minDate)
-    .add(7, 'days')
+    .add(7, "days")
     .format();
 
-  @ViewChild('pickupLoc', { static: false }) pickupLoc: ElementRef;
-  @ViewChild('dropLoc', { static: false }) dropLoc: ElementRef;
+  @ViewChild("pickupLoc", { static: false }) pickupLoc: ElementRef;
+  @ViewChild("dropLoc", { static: false }) dropLoc: ElementRef;
 
   autocomplete1: google.maps.places.Autocomplete;
   autocomplete2: google.maps.places.Autocomplete;
   place1: google.maps.places.PlaceResult; // pickup location
   place2: google.maps.places.PlaceResult; // drop location
-  distance;
+  distance: string;
+  distanceIntermediate: string;
   distanceNumerical: number;
   fare: number;
   distService: google.maps.DistanceMatrixService; // accessing the Google Distance Matrix service
 
   scheduleCabForm = new FormGroup({
-    name: new FormControl('', {
+    name: new FormControl("", {
       validators: [Validators.required, Validators.minLength(4)]
     }),
-    mobile: new FormControl('', {
+    mobile: new FormControl("", {
       validators: [
         Validators.required,
         Validators.pattern(/^[2-9]\d{2}[2-9]\d{2}\d{4}$/)
       ]
     }),
-    email: new FormControl('', {
+    email: new FormControl("", {
       validators: [Validators.required, Validators.email]
     }),
     pickup_date: new FormControl(this.minDate, {
       validators: [Validators.required] // custom validator not required for date
     }),
-    pickup_time: new FormControl('', {
+    pickup_time: new FormControl("", {
       validators: [Validators.required]
     }),
     passengers: new FormControl(1, {
       validators: [Validators.min(1), Validators.max(8), Validators.required]
     }),
-    pickup_loc: new FormControl('', {
+    pickup_loc: new FormControl("", {
       validators: [Validators.required]
     }),
-    drop_loc: new FormControl('', {
+    drop_loc: new FormControl("", {
       validators: [Validators.required]
     })
   });
@@ -87,18 +87,18 @@ export class BookOnlineComponent implements OnInit {
       this.autocomplete1 = new google.maps.places.Autocomplete(
         this.pickupLoc.nativeElement,
         {
-          componentRestrictions: { country: 'US' },
-          types: ['address']
+          componentRestrictions: { country: "US" },
+          types: ["address"]
         }
       );
       this.autocomplete2 = new google.maps.places.Autocomplete(
         this.dropLoc.nativeElement,
         {
-          componentRestrictions: { country: 'US' },
-          types: ['address']
+          componentRestrictions: { country: "US" },
+          types: ["address"]
         }
       );
-      this.autocomplete1.addListener('place_changed', () => {
+      this.autocomplete1.addListener("place_changed", () => {
         this.place1 = this.autocomplete1.getPlace(); // pickup location
         console.log(this.place1);
         // verify result
@@ -111,7 +111,7 @@ export class BookOnlineComponent implements OnInit {
         this.setPickupLoc();
       });
 
-      this.autocomplete2.addListener('place_changed', () => {
+      this.autocomplete2.addListener("place_changed", () => {
         this.place2 = this.autocomplete2.getPlace(); // drop location
         console.log(this.place2);
         if (
@@ -143,12 +143,13 @@ export class BookOnlineComponent implements OnInit {
     try {
       this.distance = await this.getDistance();
       console.log(
-        'Obtained distance before opening dialog box, distance = ' +
+        "Obtained distance before opening dialog box, distance = " +
           this.distance
       );
-      // console.log('type of distance: ' + typeof this.distance);
-      // console.log("just distance in number: " + +this.distance.split(" ")[0]);
-      this.distanceNumerical = +this.distance.split(' ')[0];
+      this.distanceIntermediate = this.distance.split(" ")[0];
+      this.distanceNumerical = Number(
+        this.distanceIntermediate.replace(/[^0-9.]+/g, "")
+      );
       this.paymentService.setDistance(this.distanceNumerical);
       this.fare = +(this.distanceNumerical * 2.6).toFixed(2);
       this.paymentService.setFare(this.fare);
@@ -165,17 +166,17 @@ export class BookOnlineComponent implements OnInit {
         // console.log(this.scheduleCabForm.value);
       }
     } catch (err) {
-      console.log('Error in obtaining distance, Error: ' + err);
+      console.log("Error in obtaining distance, Error: " + err);
       this.snackBar.openFromComponent(ErrorComponent, {
         duration: 4000,
         data: {
-          message: 'Error in obtaining distance. Cannot proceed further.'
+          message: "Error in obtaining distance. Cannot proceed further."
         }
       });
     }
   }
 
-  getDistance() {
+  getDistance(): Promise<string> {
     // Don't use async getDistance() because it already returns a Promise.
     // https://developers.google.com/maps/documentation/javascript/distancematrix#DrivingOptions
     this.distService = new google.maps.DistanceMatrixService();
@@ -206,14 +207,14 @@ export class BookOnlineComponent implements OnInit {
                   resolve(distance);
                 } else {
                   reject(
-                    new Error('Could not get distance in getDistanceMatrix()')
+                    new Error("Could not get distance in getDistanceMatrix()")
                   );
                 }
               }
             }
           } else {
             console.log(
-              'Error getting distance from google.maps.DistanceMatrix'
+              "Error getting distance from google.maps.DistanceMatrix"
             );
           }
         }
