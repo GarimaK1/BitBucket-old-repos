@@ -4,7 +4,7 @@
   "description": "first attempt at implementing mongoDB CRUD operations and using mongoose",
   "main": "1 mongoose getting started.js",
   "dependencies": {
-    "mongoose": "^5.4.19"
+    "mongoose": "^5.7.5"
   },
   "devDependencies": {},
   "scripts": {
